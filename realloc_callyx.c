@@ -10,7 +10,8 @@ void *_realloc(void *ptr, int a, int b)
 {
         if (a >= b)
         {
-                return (ptr);
+                perror("Failed to allocate memory");
+		exit(EXIT_FAILURE);
         }
         if (ptr == NULL)
         {
