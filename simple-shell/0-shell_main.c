@@ -12,6 +12,7 @@ int main (int argc __attribute__((unused)),
 		char **argv)
 {
 	char *line;
+	char **args;
 
 	(void) argv;
 	
@@ -21,5 +22,15 @@ int main (int argc __attribute__((unused)),
 	{
 		print(" ($) ", STDOUT_FILENO);
 		line = _getline();
+		
+		if (line == NULL)
+		{
+			if (isatty(STDIN_FILENO))
+				break;
+		}
+		
+		args = tokenize(line,DELIM);
+		shell_execute(args);
 	}
+	return (1);
 }
